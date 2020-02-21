@@ -58,14 +58,14 @@
   }
   .item-img{
     width: 100%;
-    height:237px;
+    /*height:237px;*/
   }
   .item-img img{
     width: 100%;
     border-radius: 5px;
   }
   .item-info{
-    font-size: 4px;
+    font-size: 13px;
     text-align: center;
   }
   .itemInfo-top{

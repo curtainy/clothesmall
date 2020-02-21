@@ -35,7 +35,7 @@
     height: 80px;
     padding: 10px;
     position: relative;
-    background-color: var(--color-high-text);
+    background-color: var(--color-tint);
     border-top: 1px solid lightcoral;
   }
   .login-top img{
