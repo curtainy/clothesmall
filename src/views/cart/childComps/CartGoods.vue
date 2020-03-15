@@ -2,7 +2,7 @@
   <div class="cart-goods">
     <cart-goods-item :goods="item" :index="index"
                      v-for="(item,index) in cartList"
-                     @imgClick="imgClick"/>
+                     @imgClick="imgClick" :key="index"/>
   </div>
 </template>
 

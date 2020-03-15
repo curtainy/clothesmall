@@ -6,7 +6,7 @@
     <div class="item-info">
       <p class="itemInfo-top">{{goodsItem.title}}</p>
       <div class="itemInfo-bottom">
-        <span>{{goodsItem.price}}</span>
+        <span>￥{{goodsItem.price}}</span>
         <img src="~assets/img/common/collect.svg">
         <span>{{goodsItem.cfav}}</span>
       </div>
@@ -27,7 +27,8 @@
     },
     computed: {
       showImage(){
-        return   this.goodsItem.image || this.goodsItem.show.img
+        // return this.goodsItem.image || this.goodsItem.show.img || this.goodsItem.img
+        return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
       }
     },
     methods: {
@@ -38,6 +39,8 @@
           this.$bus.$emit('homeItemImgLoad')
         }else if(this.$route.path.indexOf('/detail')){
           this.$bus.$emit('detailImgLoad')
+        }else if(this.$route.path.indexOf('/category')){
+          this.$bus.$emit('categoryDetailImgLoad')
         }
       },
       itemClick(){

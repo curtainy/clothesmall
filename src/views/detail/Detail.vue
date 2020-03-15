@@ -96,12 +96,14 @@
        //保存评论信息
        this.commentInfo = res.result.rate.list[0]
      }),
-
+       
+       //获取推荐信息
        getRecommend().then(res => {
          this.recommendInfo = res.data.list
        })
     },
     mounted() {
+      //页面中的图片加载出来，进行页面刷新
       const refresh = debounce(this.$refs.scroll.refresh,100)
       this.$bus.$on('detailImgLoad',()=>{
         refresh()
@@ -109,7 +111,7 @@
     },
     methods: {
       imgLoad(){
-        //所有图片记载完进行一次刷新
+        //所有图片加载完进行一次刷新
         this.$refs.scroll.refresh()
         /**
          * 【问题】：在哪里才能获取到正确的offsetTop???

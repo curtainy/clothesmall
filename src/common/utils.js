@@ -30,7 +30,7 @@ export function dataFormate(data,fmt) {
     'd+': data.getDate(),
     'h+': data.getHours(),
     'm+': data.getMinutes(),
-    's+': data.getMinutes(),
+    's+': data.getSeconds(),
   }
 
   for(let k in o){

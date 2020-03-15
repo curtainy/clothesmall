@@ -1,4 +1,4 @@
-import {ADD_COUNT,ADD_PRODUCT} from "./mutations-type"
+import { ADD_COUNT,ADD_PRODUCT, SUB_COUNT, SUB_PRODUCT } from "./mutations-type"
 
 export default {
   [ADD_COUNT](state,payload){
@@ -16,5 +16,13 @@ export default {
      for(let item of state.cartList){
        item.checked = flag
      }
+  },
+  //商品数量-1
+  [SUB_COUNT](state,payload){
+    payload.count--
+  },
+  //商品-1
+  [SUB_PRODUCT](state,payload){
+    state.cartList.splice(payload,1)
   }
 }

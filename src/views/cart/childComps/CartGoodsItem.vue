@@ -1,5 +1,5 @@
 <template>
-  <div class="content-item">
+  <div class="content-item" v-if="goods.count > 0">
     <img src="~assets/img/cart/tick.svg"
          class="icon"
          :class="{active:goods.checked}"
@@ -9,12 +9,19 @@
       <div class="title">{{goods.title}}</div>
       <div class="desc">{{goods.desc}}</div>
       <span class="price">￥{{goods.price}}</span>
-      <span class="count">x{{goods.count}}</span>
+      <div class="count">
+         <div class="btn" @click="add(goods.id)">+</div>
+         <span>x{{goods.count}}</span>
+         <div class="btn" @click="sub(goods.id)">-</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  
+  import { mapActions } from 'vuex'
+
   export default {
     name: "CartContentItem",
     props: {
@@ -27,8 +34,19 @@
      index: null
     },
     methods: {
+      ...mapActions(['addCart','deleteCart']),
+      //选中商品
       imgClick(index){
         this.$emit('imgClick',index)
+      },
+      //增加count
+      add(id){
+        const product = {id}
+        this.addCart(product)
+      },
+      //减少count
+      sub(id){
+        this.deleteCart(id)
       }
     }
   }
@@ -78,10 +96,26 @@
   }
   .price{
     color: var(--color-high-text);
-    margin-right: 140px;
+    margin-right: 50px;
   }
   .active{
     background-color: var(--color-tint);
+  }
+
+  .count{
+    display: inline-block;
+  }
+  .btn{
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    display: inline-block;
+    background-color: gainsboro;
+    text-align: center;
+    margin-right: 5px;
+  }
+  .count span{
+    padding: 5px;
   }
 
 </style>
