@@ -3,7 +3,7 @@
     <div class="login-top">
       <img src="~assets/img/profile/avatar.svg">
       <div class="top-text">
-        <div>登录/注册</div>
+        <div @click="btnClick">登录/注册</div>
         <img src="~assets/img/profile/phone.svg">
         <span>暂无绑定手机号</span>
       </div>
@@ -26,7 +26,12 @@
 
 <script>
   export default {
-    name: "Login"
+    name: "Login",
+    methods: {
+      btnClick(){
+        this.$toast.show('正在开发中。。。')
+      }
+    }
   }
 </script>
 

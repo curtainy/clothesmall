@@ -31,9 +31,7 @@ export default {
     //购物车中商品数量>1
     if(oldProduct.count > 1){
       context.commit(SUB_COUNT,oldProduct)
-    }
-    if(oldProduct.count == 1){
-      console.log(index-1)
+    }else if(oldProduct.count == 1){
       context.commit(SUB_PRODUCT,index-1)
     }
   }

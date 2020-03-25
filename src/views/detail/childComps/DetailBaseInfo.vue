@@ -12,7 +12,7 @@
       <div>{{baseInfo.services[baseInfo.services.length -1].name}}</div>
     </div>
     <div class="info-message info-send">
-      <div v-for="item in baseInfo.services.length-1" class="send-item">
+      <div v-for="item in baseInfo.services.length-1" class="send-item" :key="item">
         <img :src="baseInfo.services[item-1].icon">{{baseInfo.services[item-1].name}}
       </div>
     </div>
