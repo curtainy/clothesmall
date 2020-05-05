@@ -6,6 +6,8 @@ const profile = ()=> import('views/profile/Profile')
 const shopCart = ()=> import('views/cart/Shopcart')
 const category = ()=> import('views/category/Category')
 const detail = ()=> import('views/detail/Detail')
+const login = ()=> import('views/profile/childComps/Login')
+const register = ()=> import('views/profile/childComps/Register')
 
 //1.插入路由
 Vue.use(VueRouter)
@@ -22,7 +24,7 @@ const routes = [
   },
   {
     path: '/profile',
-    component: profile
+    component: profile,
   },
   {
     path: '/shopCart',
@@ -35,6 +37,14 @@ const routes = [
   {
     path: '/detail/:id',
     component: detail
+  },
+  {
+    path: '/login',
+    component: login
+  },
+  {
+    path: '/register',
+    component: register
   }
 ]
 

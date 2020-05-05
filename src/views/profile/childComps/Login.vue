@@ -1,90 +1,106 @@
 <template>
-  <div class="login">
-    <div class="login-top">
-      <img src="~assets/img/profile/avatar.svg">
-      <div class="top-text">
-        <div @click="btnClick">登录/注册</div>
-        <img src="~assets/img/profile/phone.svg">
-        <span>暂无绑定手机号</span>
-      </div>
-    </div>
-    <div class="login-bottom">
-      <div>
-        <div><span class="number">0.00</span>元</div>
-        <span>我的余额</span>
-      </div>
-      <div>
-        <div><span class="number">0</span>个</div>
-        <span>我的优惠</span>
-      </div><div>
-      <div><span class="number">0</span>分</div>
-      <span>我的积分</span>
-    </div>
+  <div class="login_form">
+    <div class="form">
+      <form>
+        <input type="text" placeholder="请输入账号" autofocus @focus="getFocus">
+        <span class="error">{{this.msg}}</span><br><br>
+        <input type="password" placeholder="请输入密码" @focus="getFocus">
+        <span class="error">{{this.msg}}</span><br><br>
+        <div class="log" @click="loginBtn"><span>登录</span></div>
+        <div class="add">
+          <span class="no_post" @click="registerBtn">还未注册</span>
+          <span class="forget">忘记密码</span>
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "Login",
-    methods: {
-      btnClick(){
-        this.$toast.show('正在开发中。。。')
-      }
+
+import {login} from 'network/other'
+import {saveUser,getUser} from 'common/user_utils'
+
+export default {
+  data(){
+    return {
+      msg: ''
+    }
+  },
+  methods: {
+    loginBtn(){
+      var inputs = document.getElementsByTagName('input')
+      var username = inputs[0].value
+      var password = inputs[1].value
+      
+      //登录
+      const data = {username,password}
+
+      login(data).then((msg) => {
+        const user = msg.data
+        if(user.code == 0){
+          //存储用户信息
+          saveUser(user.data)
+          console.log(user)
+          //将用户名传递给profile页面
+          this.$bus.$emit('getUsername',user.data.username)
+          console.log(getUser())
+          //路由跳转到/profile
+          this.$router.push('/profile')
+        }else{
+          this.msg = user.msg
+        }
+      })
+
+    },
+    registerBtn(){
+      this.$router.push('/register')
+    },
+    getFocus(){
+      this.msg = ''
     }
   }
+}
 </script>
 
-<style scoped>
-  .login-top{
-    height: 80px;
-    padding: 10px;
-    position: relative;
-    background-color: var(--color-tint);
-    border-top: 1px solid lightcoral;
-  }
-  .login-top img{
-    height: 60px;
-  }
-  .top-text{
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    bottom: 10px;
-    left: 80px;
-
-    color: #fff;
-  }
-
-  .top-text div{
-    font-size: 17px;
-    margin-top: 8px;
-    margin-bottom: 5px;
-  }
-  .top-text img{
-    height: 14px;
-    position: relative;
-    bottom: -2px;
-  }
-  .top-text span{
-    font-size: 13px;
-  }
-
-  .login-bottom{
-    height: 80px;
-    display: flex;
-    padding-top: 25px;
-    padding-bottom: 10px;
-  }
-  .login-bottom div{
-    flex: 1;
-    text-align: center;
-  }
-  .login-bottom>div:nth-child(2){
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-  }
-  .number{
-    color: var(--color-high-text);
-  }
+<style>
+.login_form{
+  width: 100wh;
+  height: 100vh;
+  position: relative;
+  background-color: rgba(246,216,222,0.3);
+}
+.form{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-70%);
+  width: 200px;
+  height: 200px;
+}
+.log{
+  padding: 5px;
+  width: 200px;
+  background-color: var(--color-tint);
+}
+.log span{
+  color: #fff;
+  margin-left: 80px;
+  font-size: 15px;
+}
+.add{
+  font-size: 12px;
+  width: 200px;
+  margin-top: 3px;
+}
+.no_post{
+  float: left;
+}
+.forget{
+  float:right;
+}
+.error{
+  font-size: 13px;
+  color: var(--color-tint);
+}
 </style>

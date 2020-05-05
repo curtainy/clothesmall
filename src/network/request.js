@@ -4,7 +4,7 @@ export function request(config) {
   //1.创建axios实例
   const instance = axios.create({
     // baseURL: 'http://123.207.32.32:8000/api/hy',
-    baseURL: 'http://123.207.32.32:8000/api/wh',
+    baseURL: 'http://152.136.185.210:8000/api/h8',
     timeout: 5000
   })
 
@@ -33,5 +33,18 @@ export function request(config) {
   })
 
   //3.发送请求
+  return instance(config)
+}
+
+
+export function request1(config){
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    timeout: 5000,
+    headers: {
+      "Content-Type":"application/x-www-form-urlencoded"
+    }
+  })
+  
   return instance(config)
 }

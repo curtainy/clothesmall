@@ -93,7 +93,6 @@
     mounted() {
       //放在mounted是为了保证能拿到this.$refs.scroll,而不是undefined
       //监听item中img加载，刷新BScroll中的scrollerHeight重新计算
-
       const refresh = debounce(this.$refs.scroll.refresh,100)
       this.$bus.$on('homeItemImgLoad',()=>{
         refresh()

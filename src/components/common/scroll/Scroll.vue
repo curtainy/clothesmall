@@ -41,7 +41,7 @@
      * 【1】为什么要使用【refs】而不是【querySelector()】????
      * 【答】：使用querySelector拿到的不一定是Scroll组件中class为xxx的元素，
      *        如果Home组件中也有div的class=xxx，则此处可能会拿到Home中的元素对象，
-     *        而this.refs中的this存在作用域的问题，只会拿到当前组件中class=xxx的元素对象
+     *        而this.refs中的this存在作用域的问题，只会拿到当前组件中ref=xxx的元素对象
      * 【2】ref绑定在组件中，this.refs拿到的就是组件对象
      *     ref绑定在元素中，this.refs拿到的就是元素对象
      */
@@ -60,7 +60,7 @@
         this.$emit('scrollTop',position)
       })
 
-      //3.下拉加载更多
+      //3.上拉加载更多
       this.bScroll.on('pullingUp',() => {
         this.$emit('pullingUp')
       })

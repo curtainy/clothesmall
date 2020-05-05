@@ -3,7 +3,7 @@
     <nav-bar class="profile-bar">
       <div slot="center">我的档案</div>
     </nav-bar>
-    <login/>
+    <top/>
     <message/>
     <about-cart/>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
   import NavBar from "components/common/navbar/NavBar"
-  import Login from "./childComps/Login"
+  import Top from "./childComps/Top"
   import Message from "./childComps/Message"
   import AboutCart from "./childComps/AboutCart"
 
@@ -20,7 +20,7 @@
     components: {
       Message,
       NavBar,
-      Login,
+      Top,
       AboutCart
     }
   }
