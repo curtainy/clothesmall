@@ -41,12 +41,14 @@ export default {
         if(user.code == 0){
           //存储用户信息
           saveUser(user.data)
-          console.log(user)
+          // console.log(user)
           //将用户名传递给profile页面
           this.$bus.$emit('getUsername',user.data.username)
-          console.log(getUser())
+          // console.log(getUser())
           //路由跳转到/profile
           this.$router.push('/profile')
+          //state中数据初始化
+          this.$store.commit('initState')
         }else{
           this.msg = user.msg
         }

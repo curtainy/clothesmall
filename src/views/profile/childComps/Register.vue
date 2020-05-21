@@ -4,7 +4,8 @@
       <form>
         <input type="text" placeholder="请输入账号" @focus="userInput" autofocus>
         <span>{{msg}}</span><br><br>
-        <input type="password" placeholder="请输入密码"><br><br>
+        <input type="password" placeholder="请输入密码" @focus="errInput">
+        <span>{{errorMsg}}</span><br><br>
         <input type="password" placeholder="确认密码" @focus="cfmInput">
         <span>{{confirmMsg}}</span><br><br>
         <div class="postBtn" @click="postBtn"><span>注册</span></div>
@@ -23,7 +24,8 @@ export default {
   data(){
     return {
       msg: '',
-      confirmMsg: ''
+      confirmMsg: '',
+      errorMsg: ''
     }
   },
   methods: {
@@ -32,6 +34,9 @@ export default {
     },
     cfmInput(){
       this.confirmMsg = ''
+    },
+    errInput(){
+      this.errorMsg = ''
     },
     postBtn(){
       const inputs = document.getElementsByTagName('input')
@@ -42,24 +47,35 @@ export default {
       //确认密码
       const confirm = inputs[2].value
       
+      
+
       // console.log(username,password,confirm)
       if(password === confirm){
-        const data = {username,password}
-        //发送请求
-        register(data).then((msg) => {
-           const user = msg.data
-           if(user.code != 0) this.msg = user.msg
-           else if(user.code == 0){
-             //将用户信息存储起来
-             saveUser(user.data)
-             //将用户名传递给profile页面
-             this.$bus.$emit('getUsername',user.data.username)
-             //路由跳转到/profile
-             this.$router.push('/profile')
-           }
-        },(error) => {
-           console.log('error')
-        })
+        //密码（不少于6位，且由数字和字符组成）
+        if(password.length >= 6 && password.search(/[a-zA-Z]/)!=-1
+           && password.search(/\d/)!=-1){
+
+          const data = {username,password}
+          //发送请求
+          register(data).then((msg) => {
+            const user = msg.data
+            if(user.code != 0) this.msg = user.msg
+            else if(user.code == 0){
+              //将用户信息存储起来
+              saveUser(user.data)
+              //将用户名传递给profile页面
+              this.$bus.$emit('getUsername',user.data.username)
+              //初始化state中的数据
+              this.$store.commit('initState')
+              //路由跳转到/profile
+              this.$router.push('/profile')
+            }
+          },(error) => {
+            console.log('error')
+          })
+        }else{
+          this.errorMsg = '密码由不少于6位数字和字母组成'
+        }  
       }else{
         this.confirmMsg = '请重新确认密码'
       }

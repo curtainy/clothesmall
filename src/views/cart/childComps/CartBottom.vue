@@ -45,6 +45,9 @@
         if(this.cartPay.cartPayCount === 0){
           //发送一个添加商品toast消息
           this.$toast.show('请先选择要购买商品')
+        }else if(!this.$store.state.isLoad){
+          //先登录
+          this.$toast.show('请先登录')
         }else{
           //发送一个添加银行卡的toast消息
           this.$toast.show('还未添加银行卡')

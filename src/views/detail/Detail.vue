@@ -38,7 +38,6 @@
 
   // import Toast from "components/content/toast/Toast"
 
-
   export default {
     name: "Detail",
     data(){
@@ -164,16 +163,14 @@
           img: this.topImgs[0],
           title: this.baseInfo.title,
           desc: this.baseInfo.desc,
-          price: this.baseInfo.realPrice
+          price: this.baseInfo.realPrice,
+          checked: true,
+          count: 1
         }
-        //2.将信息添加到store上
         this.$store.dispatch('addCart',product).then(res => {
           //3.发送一条toast
           this.$toast.show(res)
         })
-        // console.log(this.$toast);
-        // this.$toast.show('成功添加到购物车')
-
       }
     }
   }

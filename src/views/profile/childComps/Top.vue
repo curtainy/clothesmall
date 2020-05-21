@@ -51,7 +51,7 @@
       }
 
       this.$bus.$on('getUsername',(username) => {
-        console.log(username)
+        // console.log(username)
         this.username = username
       })
     },
@@ -63,6 +63,9 @@
         this.$router.push('/register')
       },
       quitBtn(){
+        //清空state中的数据
+        this.$store.commit('clearState')
+
         removeUser()
         this.username = ''
       }

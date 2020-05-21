@@ -41,8 +41,7 @@
       },
       //增加count
       add(id){
-        const product = {id}
-        this.addCart(product)
+        this.addCart({id:id})
       },
       //减少count
       sub(id){
